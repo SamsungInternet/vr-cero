@@ -62,7 +62,7 @@ var addTrackedControllers = function(leftH, rightH){
 
 var addGearVRControl = function(){
   var t_gearvrCrtrl = document.createElement('a-entity');
-  t_gearvrCrtrl.setAttribute('gearvr-controls', 'hand:right');
+  t_gearvrCrtrl.setAttribute('gearvr-controls', '');
   document.querySelector('a-scene').appendChild(t_gearvrCrtrl);
 }
 
