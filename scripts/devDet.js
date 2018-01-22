@@ -7,11 +7,16 @@ var deviceDetection = function(){
         console.log('WebXR supported');
         // Then get the displays attached to the computer
         navigator.getVRDisplays().then(function(displays) {
-          if(displays.length > 0) {
-            vrDisplay = displays[0];
-            console.log(displays[0].displayName);
-            addTrackedControllers(false, true);
-            // Now we have our VRDisplay object and can do what we want with it
+          if(displays.length > 0) { //if there are VR devices attached to the machine
+            console.log(displays[0].displayName + "attached");
+
+            if(AFRAME.utils.device.isGearVR()){
+              addGearVRControl();
+            }
+            else{
+              addTrackedControllers(true, true);
+            }
+
           }
           else{ // no headset connected
             console.log('no headset available');
@@ -56,7 +61,9 @@ var addTrackedControllers = function(leftH, rightH){
 }
 
 var addGearVRControl = function(){
-
+  var t_gearvrCrtrl = document.createElement('a-entity');
+  t_gearvrCrtrl.setAttribute('gearvr-controls', 'hand:right');
+  document.querySelector('a-scene').appendChild(t_gearvrCrtrl);
 }
 
 
