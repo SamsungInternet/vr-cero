@@ -21,6 +21,7 @@ var deviceDetection = function(){
       }
       else{ // spec not implemented
         createCursor();
+        
       }
 }
 
