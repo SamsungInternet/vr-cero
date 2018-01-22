@@ -7,10 +7,10 @@ var deviceDetection = function(){
         console.log('WebXR supported');
         // Then get the displays attached to the computer
         navigator.getVRDisplays().then(function(displays) {
-          // If a display is available, use it to present the scene
           if(displays.length > 0) {
             vrDisplay = displays[0];
             console.log(displays[0].displayName);
+            addTrackedControllers(false, true);
             // Now we have our VRDisplay object and can do what we want with it
           }
           else{ // no headset connected
@@ -30,7 +30,6 @@ var createCursor = function(){
   
   //creates camera
   var t_cam = document.querySelector('[camera]')
-  t_cam.setAttribute('camera');
   //creates and attadches cursor 
   var t_cursor = document.createElement('a-entity');
   t_cursor.setAttribute('cursor', 'fuse:true; fuseTimeout:500');
@@ -40,6 +39,24 @@ var createCursor = function(){
 
   t_cam.appendChild(t_cursor);
   console.log('added cursor');
+}
+
+var addTrackedControllers = function(leftH, rightH){
+
+  if(leftH){
+    var t_trackCtrls = document.createElement('a-entity');
+    t_trackCtrls.setAttribute('tracked-controls', 'hand:left');
+    document.querySelector('a-scene').appendChild(t_trackCtrls);
+  }
+  if(rightH){
+    var t_trackCtrls = document.createElement('a-entity');
+    t_trackCtrls.setAttribute('tracked-controls', 'hand:right');
+    document.querySelector('a-scene').appendChild(t_trackCtrls);
+  }  
+}
+
+var addGearVRControl = function(){
+
 }
 
 
