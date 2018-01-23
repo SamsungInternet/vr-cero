@@ -13,10 +13,10 @@ var deviceDetection = function(){
             if(AFRAME.utils.device.isGearVR()){
               addGearVRControl();
             }
-            else if(displays[0].displayName.indexof('Windows Mixed Reality') != -1){ 
+            else if(displays[0].displayName.indexOf('Windows Mixed Reality') != -1){ 
               addWindowsMixedRealityControllers();
             }
-            else if(displays[0].displayName.indexof('Oculus') != -1)
+            else if(displays[0].displayName.indexOf('Oculus') != -1)
             {
               addOculusTouch();
             }
