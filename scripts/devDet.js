@@ -13,12 +13,14 @@ var deviceDetection = function(){
             if(AFRAME.utils.device.isGearVR()){
               addGearVRControl();
             }
-            else{
-              
-              addOculusTouch();
-              console.log('added tracked controllers');
+            else if(displays[0].displayName.indexof('Windows Mixed Reality') != -1){ 
+              addWindowsMixedRealityControllers();
             }
-
+            else if(displays[0].displayName.indexof('Oculus') != -1)
+            {
+              addOculusTouch();
+            }
+            console.log('added tracked controls');
           }
           else{ // no headset connected
             console.log('no headset available');
@@ -48,33 +50,28 @@ var createCursor = function(){
   console.log('added cursor');
 }
 
-var addTrackedControllers = function(leftH, rightH){
-
-  if(leftH){
-    var t_trackCtrls = document.createElement('a-entity');
-    t_trackCtrls.setAttribute('tracked-controls', 'controller: 0');
-    document.querySelector('a-scene').appendChild(t_trackCtrls);
-  }
-  if(rightH){
-    var t_trackCtrls = document.createElement('a-entity');
-    t_trackCtrls.setAttribute('tracked-controls', 'controller: 1');
-    document.querySelector('a-scene').appendChild(t_trackCtrls);
-  }  
-}
-
 var addOculusTouch = function(){
   var t_touchCtrls_L = document.createElement('a-entity');
-    t_touchCtrls_L.setAttribute('oculus-touch-controls', 'hand:left');
-    document.querySelector('a-scene').appendChild(t_touchCtrls_L);
-    var t_touchCtrls_R = document.createElement('a-entity');
-    t_touchCtrls_R.setAttribute('oculus-touch-controls', 'hand:right');
-    document.querySelector('a-scene').appendChild(t_touchCtrls_R);
+  t_touchCtrls_L.setAttribute('oculus-touch-controls', 'hand:left');
+  document.querySelector('a-scene').appendChild(t_touchCtrls_L);
+  var t_touchCtrls_R = document.createElement('a-entity');
+  t_touchCtrls_R.setAttribute('oculus-touch-controls', 'hand:right');
+  document.querySelector('a-scene').appendChild(t_touchCtrls_R);
 }
 
 var addGearVRControl = function(){
   var t_gearvrCtrl = document.createElement('a-entity');
   t_gearvrCtrl.setAttribute('gearvr-controls', '');
   document.querySelector('a-scene').appendChild(t_gearvrCtrl);
+}
+
+var addWindowsMixedRealityControllers = function(){
+  var t_WMRCtrls_L = document.createElement('a-entity');
+  t_WMRCtrls_L.setAttribute('windows-motion-controls', 'hand:left');
+  document.querySelector('a-scene').appendChild(t_WMRCtrls_L);
+  var t_WMRCtrls_R = document.createElement('a-entity');
+  t_WMRCtrls_R.setAttribute('windows-motion-controls', 'hand:right');
+  document.querySelector('a-scene').appendChild(t_WMRCtrls_R);
 }
 
 
