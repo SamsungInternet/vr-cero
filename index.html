@@ -6,12 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>VR CERO - Progressive Enhanced Template</title>
     <script src="scripts/external/aframe.min.js"></script>
-    <script src="scripts/vr0.js"></script>
     <script src="scripts/devDet.js"></script>
+    <script src="scripts/vr0.js"></script>
+    
 </head>
 <body>
     <a-scene>
-        <a-sky color="#3D3D3D"></a-sky>
+        <a-assets>
+            <img id="sky" src="images/bg.png">
+        </a-assets>
+        <a-sky src="#sky"></a-sky>
+        <a-entity tracked-controls></a-entity>
+        <a-entity tracked-controls></a-entity>
     </a-scene>
 </body>
 </html>

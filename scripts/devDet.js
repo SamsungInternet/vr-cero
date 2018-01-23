@@ -1,5 +1,3 @@
-console.log('DevDet... on');
-
 var devDet_scene = null;
 
 var deviceDetection = function(){
@@ -10,13 +8,15 @@ var deviceDetection = function(){
         // Then get the displays attached to the computer
         navigator.getVRDisplays().then(function(displays) {
           if(displays.length > 0) { //if there are VR devices attached to the machine
-            console.log(displays[0].displayName + "attached");
+            console.log(displays[0].displayName + " attached");
 
             if(AFRAME.utils.device.isGearVR()){
               addGearVRControl();
             }
             else{
-              addTrackedControllers(true, true);
+              
+              addOculusTouch();
+              console.log('added tracked controllers');
             }
 
           }
@@ -52,14 +52,23 @@ var addTrackedControllers = function(leftH, rightH){
 
   if(leftH){
     var t_trackCtrls = document.createElement('a-entity');
-    t_trackCtrls.setAttribute('tracked-controls', 'hand:left');
+    t_trackCtrls.setAttribute('tracked-controls', 'controller: 0');
     document.querySelector('a-scene').appendChild(t_trackCtrls);
   }
   if(rightH){
     var t_trackCtrls = document.createElement('a-entity');
-    t_trackCtrls.setAttribute('tracked-controls', 'hand:right');
+    t_trackCtrls.setAttribute('tracked-controls', 'controller: 1');
     document.querySelector('a-scene').appendChild(t_trackCtrls);
   }  
+}
+
+var addOculusTouch = function(){
+  var t_touchCtrls_L = document.createElement('a-entity');
+    t_touchCtrls_L.setAttribute('oculus-touch-controls', 'hand:left');
+    document.querySelector('a-scene').appendChild(t_touchCtrls_L);
+    var t_touchCtrls_R = document.createElement('a-entity');
+    t_touchCtrls_R.setAttribute('oculus-touch-controls', 'hand:right');
+    document.querySelector('a-scene').appendChild(t_touchCtrls_R);
 }
 
 var addGearVRControl = function(){
