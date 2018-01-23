@@ -9,11 +9,16 @@ var deviceDetection = function(){
         console.log('WebXR supported');
         // Then get the displays attached to the computer
         navigator.getVRDisplays().then(function(displays) {
-          // If a display is available, use it to present the scene
-          if(displays.length > 0) {
-            vrDisplay = displays[0];
-            console.log(displays[0].displayName);
-            // Now we have our VRDisplay object and can do what we want with it
+          if(displays.length > 0) { //if there are VR devices attached to the machine
+            console.log(displays[0].displayName + "attached");
+
+            if(AFRAME.utils.device.isGearVR()){
+              addGearVRControl();
+            }
+            else{
+              addTrackedControllers(true, true);
+            }
+
           }
           else{ // no headset connected
             console.log('no headset available');
@@ -32,7 +37,6 @@ var createCursor = function(){
   
   //creates camera
   var t_cam = document.querySelector('[camera]')
-  t_cam.setAttribute('camera');
   //creates and attadches cursor 
   var t_cursor = document.createElement('a-entity');
   t_cursor.setAttribute('cursor', 'fuse:true; fuseTimeout:500');
@@ -42,6 +46,26 @@ var createCursor = function(){
 
   t_cam.appendChild(t_cursor);
   console.log('added cursor');
+}
+
+var addTrackedControllers = function(leftH, rightH){
+
+  if(leftH){
+    var t_trackCtrls = document.createElement('a-entity');
+    t_trackCtrls.setAttribute('tracked-controls', 'hand:left');
+    document.querySelector('a-scene').appendChild(t_trackCtrls);
+  }
+  if(rightH){
+    var t_trackCtrls = document.createElement('a-entity');
+    t_trackCtrls.setAttribute('tracked-controls', 'hand:right');
+    document.querySelector('a-scene').appendChild(t_trackCtrls);
+  }  
+}
+
+var addGearVRControl = function(){
+  var t_gearvrCrtrl = document.createElement('a-entity');
+  t_gearvrCrtrl.setAttribute('gearvr-controls', '');
+  document.querySelector('a-scene').appendChild(t_gearvrCrtrl);
 }
 
 
