@@ -72,9 +72,9 @@ var addOculusTouch = function(){
 }
 
 var addGearVRControl = function(){
-  var t_gearvrCrtrl = document.createElement('a-entity');
-  t_gearvrCrtrl.setAttribute('gearvr-controls', '');
-  document.querySelector('a-scene').appendChild(t_gearvrCrtrl);
+  var t_gearvrCtrl = document.createElement('a-entity');
+  t_gearvrCtrl.setAttribute('gearvr-controls', '');
+  document.querySelector('a-scene').appendChild(t_gearvrCtrl);
 }
 
 
