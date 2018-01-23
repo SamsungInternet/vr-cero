@@ -1,3 +1,5 @@
+console.log('DevDet... on');
+
 var devDet_scene = null;
 
 var deviceDetection = function(){
