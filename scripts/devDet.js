@@ -61,7 +61,7 @@ var addOculusTouch = function(){
 
 var addGearVRControl = function(){
   var t_gearvrCtrl = document.createElement('a-entity');
-  t_gearvrCtrl.setAttribute('gearvr-controls', '');
+  t_gearvrCtrl.setAttribute('gearvr-controls', 'hand:right');
   document.querySelector('a-scene').appendChild(t_gearvrCtrl);
 }
 
